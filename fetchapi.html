@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRUD Fetch API- F1 WEB-Programozás I</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <span class="nav-logo">&#x1F3CE; F1 App</span>
+      <div class="nav-links">
+        <a href="index.html">Főoldal</a>
+        <a href="javascript.html" >JavaScript</a>
+        <a href="react.html">React</a>
+        <a href="spa.html">SPA</a>
+        <a href="fetchapi.html"class="active">Fetch API</a>
+        <a href="axios.html">Axios</a>
+        <a href="oojs.html">OOJS</a>
+      </div>
+    </div>
+  </nav>
+
+  
+  <main class="content-wrapper">
+    <h2 class="page-title">Fetch API - Adatbazis Kezelo</h2>
+
+<div class="form-box">
+  <form onsubmit="event.preventDefault(); adatMentesGomb();">
+    <input type="hidden" id="titkosId">
+    <div>
+      <label>Dátum</label>
+      <input type="date" id="mezoDatum">
+    </div>
+    <div>
+      <label>Név</label>
+      <input type="text" id="mezoNev">
+    </div>
+    <div>
+      <label>Helyszín</label>
+      <input type="text" id="mezoHelyszin">
+    </div>
+    <div class="form-action-buttons">
+      <input type="submit" value="Elküld">
+    </div>
+  </form>
+</div>
+
+<input type="text" id="keresoMezo" onkeyup="gyorsKereso()" placeholder="Keresés név vagy helyszín alapján..." style="margin-bottom: 15px; padding: 10px; width: 100%; border: 1px solid #ccc; border-radius: 4px;">
+
+<table class="list" id="cuccokTablazata">
+  <thead>
+    <tr>
+      <th>Dátum</th>
+      <th>Név</th>
+      <th>Helyszín</th>
+      <th>Műveletek</th>
+    </tr>
+  </thead>
+  <tbody id="tablazatBele"></tbody>
+</table>
+
+<script>
+  window.onload = function() {
+      motyoLetoltes();
+  };
+
+  function motyoLetoltes() {
+      fetch('api.php')
+      .then(valasz => valasz.json())
+      .then(adatok => {
+          let asztal = document.getElementById('tablazatBele');
+          asztal.innerHTML = '';
+          for(let i = 0; i < adatok.length; i++) {
+              let sor = adatok[i];
+              asztal.innerHTML += `<tr>
+                  <td>${sor.datum !== null ? sor.datum : ''}</td>
+                  <td>${sor.nev !== null ? sor.nev : ''}</td>
+                  <td>${sor.helyszin !== null ? sor.helyszin : ''}</td>
+                  <td>
+                      <a style="cursor: pointer;"
+                          data-id="${sor.id}" 
+                          data-datum="${sor.datum}" 
+                          data-nev="${sor.nev}" 
+                          data-hely="${sor.helyszin}" 
+                          onclick="szerkeszteshezBetolt(this.dataset.id, this.dataset.datum, this.dataset.nev, this.dataset.hely)">
+                          EDIT
+                      </a>
+                      <a style="cursor: pointer;" onclick="kitorlesMegerosite('${sor.id}')">DELETE</a>
+                  </td>
+              </tr>`;
+          }
+      });
+  }
+
+function gyorsKereso() {
+    let beirtSzoveg = document.getElementById('keresoMezo').value.toLowerCase();
+    let asztalSorok = document.getElementById('tablazatBele').getElementsByTagName('tr');
+
+    for (let i = 0; i < asztalSorok.length; i++) {
+        let nevOszlop = asztalSorok[i].getElementsByTagName('td')[1];
+        let helyOszlop = asztalSorok[i].getElementsByTagName('td')[2];
+        
+        if (nevOszlop || helyOszlop) {
+            let nevSzoveg = nevOszlop.textContent || nevOszlop.innerText;
+            let helySzoveg = helyOszlop.textContent || helyOszlop.innerText;
+            
+            // Megnézzük, hogy a névben vagy a helyszínben benne van-e a keresett szó
+            if (nevSzoveg.toLowerCase().indexOf(beirtSzoveg) > -1 || helySzoveg.toLowerCase().indexOf(beirtSzoveg) > -1) {
+                asztalSorok[i].style.display = ""; // Mutatjuk, ha passzol
+            } else {
+                asztalSorok[i].style.display = "none"; // Eltüntetjük, ha nem passzol
+            }
+        }
+    }
+}
+
+
+  function adatMentesGomb() {
+      let bId = document.getElementById('titkosId').value;
+      let bDatum = document.getElementById('mezoDatum').value;
+      let bNev = document.getElementById('mezoNev').value;
+      let bHely = document.getElementById('mezoHelyszin').value;
+
+      let kuldeniValo = { datum: bDatum, nev: bNev, helyszin: bHely };
+      let metodus = 'POST';
+
+      if (bId !== "") {
+          kuldeniValo.id = bId;
+          metodus = 'PUT';
+      }
+
+      fetch('api.php', {
+          method: metodus,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(kuldeniValo)
+      }).then(() => {
+          document.getElementById('titkosId').value = '';
+          document.getElementById('mezoDatum').value = '';
+          document.getElementById('mezoNev').value = '';
+          document.getElementById('mezoHelyszin').value = '';
+          motyoLetoltes();
+      });
+  }
+
+  function szerkeszteshezBetolt(pId, pDatum, pNev, pHely) {
+      document.getElementById('titkosId').value = (pId === 'null' || pId === 'undefined') ? '' : pId;
+      document.getElementById('mezoDatum').value = (pDatum === 'null' || pDatum === 'undefined') ? '' : pDatum;
+      document.getElementById('mezoNev').value = (pNev === 'null' || pNev === 'undefined') ? '' : pNev;
+      document.getElementById('mezoHelyszin').value = (pHely === 'null' || pHely === 'undefined') ? '' : pHely;
+  }
+
+  function kitorlesMegerosite(pId) {
+      fetch('api.php', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: pId })
+      }).then(() => {
+          motyoLetoltes();
+      });
+  }
+</script>
+  
+  </main>
+
+  
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">&#x1F3C1; Formula 1 &mdash; WEB-Programozás I</div>
+      <div class="footer-names">
+        <strong>Csík Olivér</strong> &mdash; GKNF9A<br>
+        <strong>Czine Bence</strong> &mdash; VB3707
+      </div>
+      <div class="footer-copy">&copy; 2026 &mdash; Minden jog fenntartva</div>
+    </div>
+  </footer>
+
+
+</body>
+</html>
