@@ -352,3 +352,178 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 input[type="date"]::-webkit-calendar-picker-indicator:hover {
   opacity: 1;
 }
+
+/* ════════════════════════════════
+   TARTALOM WRAPPER  (javascript.html)
+   ════════════════════════════════ */
+.content-wrapper {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1.5rem 6rem;
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  border-left: 4px solid var(--accent);
+  padding-left: 16px;
+}
+
+/* ════════════════════════════════
+   TÁBLÁZAT  (javascript.html)
+   ════════════════════════════════ */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+}
+th, td {
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 14px;
+}
+th {
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 13px;
+}
+tr:nth-child(even) { background: var(--card); }
+tr:nth-child(odd)  { background: var(--bg2); }
+tr:hover { background: rgba(225,6,0,0.06); }
+td { color: var(--text); }
+
+/* Edit / Delete linkek a táblázatban */
+td a {
+  color: var(--accent);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border: 1px solid var(--border-r);
+  border-radius: 3px;
+  margin-right: 6px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  display: inline-block;
+}
+td a:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* ════════════════════════════════
+   FORMÁK  (javascript.html)
+   ════════════════════════════════ */
+.form-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+label {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-bottom: 6px;
+  margin-top: 12px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* Csak a .form-box-on belüli gombok kapják ezt a stílust!
+   A React app gombjait NEM fogja meg. */
+.form-box input[type="submit"],
+.form-box button {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 4px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  margin-top: 12px;
+  margin-right: 8px;
+}
+.form-box input[type="submit"]:hover,
+.form-box button:hover {
+  background: var(--accent2);
+  transform: translateY(-1px);
+}
+
+.validation-error { color: #ff6b6b; font-size: 12px; margin-left: 6px; }
+.hide { display: none; }
+
+/* ════════════════════════════════
+   ANIMÁCIÓK
+   ════════════════════════════════ */
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ════════════════════════════════
+   RESZPONZÍV
+   ════════════════════════════════ */
+@media (max-width: 768px) {
+  .nav-inner { flex-direction: column; align-items: flex-start; gap: 0; }
+  .nav-logo  { border-right: none; border-bottom: 1px solid var(--border); padding: 0.75rem 0; width: 100%; margin-right: 0; }
+  .nav-links { width: 100%; }
+  nav a { padding: 0.6rem 0.75rem; font-size: 13px; }
+  .content-wrapper { padding: 0 1rem 5rem; }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 2.8rem; }
+}
+
+/* ── DÁTUM INPUT  (javascript.html) ── */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.5;
+  cursor: pointer;
+}
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
