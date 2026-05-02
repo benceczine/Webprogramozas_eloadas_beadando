@@ -1,0 +1,354 @@
+/* ══════════════════════════════════════════════
+   F1 WEB APP – Globális stíluslap (style.css)
+   Minden oldal ezt hívja meg: <link rel="stylesheet" href="css/style.css">
+   ══════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+/* ── CSS VÁLTOZÓK ── */
+:root {
+  --bg:       #0a0a0a;
+  --bg2:      #111111;
+  --card:     #161616;
+  --accent:   #e10600;
+  --accent2:  #ff4d3a;
+  --text:     #f0f0f0;
+  --muted:    #7a7a7a;
+  --border:   rgba(255,255,255,0.07);
+  --border-r: rgba(225,6,0,0.25);
+  --font-display: 'Barlow Condensed', sans-serif;
+  --font-body:    'Barlow', sans-serif;
+}
+
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ════════════════════════════════
+   HERO / HEADER  (index.html)
+   ════════════════════════════════ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+/* Badge */
+.badge {
+  display: inline-block;
+  border: 1px solid var(--border-r);
+  border-radius: 999px;
+  padding: 6px 20px;
+  font-size: 13px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  background: rgba(225,6,0,0.08);
+  animation: fadein 0.8s ease both;
+}
+
+/* H1 */
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  max-width: 780px;
+  animation: fadein 0.9s ease 0.1s both;
+}
+.accent-text {
+  color: var(--accent);
+  display: block;
+}
+
+.subtitle {
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 560px;
+  line-height: 1.75;
+  font-weight: 300;
+  animation: fadein 1s ease 0.2s both;
+}
+
+/* ════════════════════════════════
+   NAV  (minden oldal)
+   ════════════════════════════════ */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(18px);
+  border-bottom: 2px solid var(--accent);
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.75rem 1.2rem 0.75rem 0;
+  white-space: nowrap;
+  border-right: 1px solid var(--border);
+  margin-right: 0.5rem;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.75rem 1rem;
+  transition: color 0.15s, background 0.15s;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+}
+nav a:hover { color: var(--text); border-bottom-color: var(--accent); }
+nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ════════════════════════════════
+   FOOTER  (minden oldal)
+   ════════════════════════════════ */
+footer {
+  background: var(--bg2);
+  border-top: 2px solid var(--accent);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+.footer-inner { max-width: 600px; margin: 0 auto; }
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.8rem;
+}
+.footer-names {
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
+  line-height: 1.8;
+}
+.footer-names strong { color: var(--text); }
+.footer-copy {
+  font-size: 12px;
+  color: rgba(122,122,122,0.5);
+  margin-top: 1.5rem;
+}
+
+/* ════════════════════════════════
+   TARTALOM WRAPPER  (javascript.html)
+   ════════════════════════════════ */
+.content-wrapper {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1.5rem 6rem;
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  border-left: 4px solid var(--accent);
+  padding-left: 16px;
+}
+
+/* ════════════════════════════════
+   TÁBLÁZAT  (javascript.html)
+   ════════════════════════════════ */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+}
+th, td {
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 14px;
+}
+th {
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 13px;
+}
+tr:nth-child(even) { background: var(--card); }
+tr:nth-child(odd)  { background: var(--bg2); }
+tr:hover { background: rgba(225,6,0,0.06); }
+td { color: var(--text); }
+
+/* Edit / Delete linkek a táblázatban */
+td a {
+  color: var(--accent);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border: 1px solid var(--border-r);
+  border-radius: 3px;
+  margin-right: 6px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  display: inline-block;
+}
+td a:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* ════════════════════════════════
+   FORMÁK  (javascript.html)
+   ════════════════════════════════ */
+.form-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+label {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-bottom: 6px;
+  margin-top: 12px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* Csak a .form-box-on belüli gombok kapják ezt a stílust!
+   A React app gombjait NEM fogja meg. */
+.form-box input[type="submit"],
+.form-box button {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 4px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  margin-top: 12px;
+  margin-right: 8px;
+}
+.form-box input[type="submit"]:hover,
+.form-box button:hover {
+  background: var(--accent2);
+  transform: translateY(-1px);
+}
+
+.validation-error { color: #ff6b6b; font-size: 12px; margin-left: 6px; }
+.hide { display: none; }
+
+/* ════════════════════════════════
+   ANIMÁCIÓK
+   ════════════════════════════════ */
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ════════════════════════════════
+   RESZPONZÍV
+   ════════════════════════════════ */
+@media (max-width: 768px) {
+  .nav-inner { flex-direction: column; align-items: flex-start; gap: 0; }
+  .nav-logo  { border-right: none; border-bottom: 1px solid var(--border); padding: 0.75rem 0; width: 100%; margin-right: 0; }
+  .nav-links { width: 100%; }
+  nav a { padding: 0.6rem 0.75rem; font-size: 13px; }
+  .content-wrapper { padding: 0 1rem 5rem; }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 2.8rem; }
+}
+
+/* ── DÁTUM INPUT  (javascript.html) ── */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.5;
+  cursor: pointer;
+}
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
