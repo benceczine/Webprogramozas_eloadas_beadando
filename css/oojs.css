@@ -1,0 +1,168 @@
+/* ══════════════════════════════════════════════
+   F1 GARÁZS – OO JavaScript oldal stílusai
+   Csak az oojs.html használja
+   ══════════════════════════════════════════════ */
+
+#garazs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 2rem;
+}
+
+.f1-kartya {
+  background: #161616;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-top: 3px solid #e10600;
+  border-radius: 8px;
+  padding: 1.25rem;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.kartya-fejlec {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.szin-csik {
+  width: 4px;
+  height: 36px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.auto-nev {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: #f0f0f0;
+  display: block;
+  line-height: 1.2;
+}
+
+.csapat-nev {
+  font-size: 12px;
+  color: #7a7a7a;
+  display: block;
+}
+
+.info-sor {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.info-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #7a7a7a;
+  width: 36px;
+  flex-shrink: 0;
+}
+
+.gumi-jelzo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tank-wrapper {
+  flex: 1;
+  background: #0a0a0a;
+  border-radius: 3px;
+  height: 8px;
+  overflow: hidden;
+}
+
+.tank-bar {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.4s ease, background 0.4s ease;
+}
+
+.tank-szazalek {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #f0f0f0;
+  min-width: 36px;
+  text-align: right;
+}
+
+.gomb-sor {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.gumi-gomb {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 5px 8px;
+  background: transparent;
+  border: 1px solid;
+  border-radius: 3px;
+  color: #f0f0f0;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.gumi-gomb:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-1px);
+}
+
+.fogyaszt-gomb {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  background: #1e1e1e;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 3px;
+  color: #f0f0f0;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.fogyaszt-gomb:hover {
+  background: #2a2a2a;
+  transform: translateY(-1px);
+}
+
+.tankol-gomb {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  background: #e10600;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.tankol-gomb:hover {
+  background: #ff4d3a;
+  transform: translateY(-1px);
+}
